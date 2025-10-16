@@ -37,7 +37,7 @@ jobs:
 
       - name: Setup ssh key
         run: |
-          makdir -p ~/.ssh
+          mkdir -p ~/.ssh
           echo "$ARM_SSH_PUBLIC_KEY" >> ~/.ssh/networkproject_key.pub
           echo "${{ secrets.SSH_PRIVATE_KEY }}" >> ~/.ssh/authorized_keys
           chmod 600 ~/.ssh/authorized_keys
