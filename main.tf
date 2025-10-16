@@ -125,7 +125,7 @@ resource "azurerm_linux_virtual_machine" "JumpVM" {
 
 
   admin_ssh_key {
-    username   = "azureuser"
+    username   = "JumpServeruser"
     public_key = var.ssh_public_key
   }
   
@@ -133,6 +133,7 @@ resource "azurerm_linux_virtual_machine" "JumpVM" {
   os_disk {
     name              = "JumpVM_OSDisk"
     caching           = "ReadWrite"
+    storage_account_type = "Standard_LRS"
   }
 
   source_image_reference {
