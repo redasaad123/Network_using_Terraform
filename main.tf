@@ -1,6 +1,11 @@
 provider "azurerm" {
   features {}
 
+  client_id = var.client_id
+  client_secret = var.client_secret
+  subscription_id = var.subscription_id
+  tenant_id = var.tenant_id
+
   
 }
 
@@ -109,38 +114,32 @@ resource "azurerm_nat_gateway_public_ip_association" "NatGW_IP" {
   public_ip_address_id = azurerm_public_ip.PublicIP.id
 }
 
-resource "azurerm_virtual_machine" "JumpVM" {
+resource "azurerm_linux_virtual_machine" "JumpVM" {
   name                  = "JumpVM"
   location              = azurerm_resource_group.NetGroup.location
   resource_group_name   = azurerm_resource_group.NetGroup.name
+  size               = "Standard_B1s"
+  admin_username        = "azureuser"
   network_interface_ids = [azurerm_network_interface.NIC.id]
-  vm_size               = "Standard_B1s"
+  
 
-  delete_os_disk_on_termination = true
-  delete_data_disks_on_termination = true
 
-  storage_os_disk {
+  admin_ssh_key {
+    username   = "azureuser"
+    public_key = var.ssh_public_key
+  }
+  
+
+  os_disk {
     name              = "JumpVM_OSDisk"
     caching           = "ReadWrite"
-    create_option     = "FromImage"
-    managed_disk_type = "Standard_LRS"
   }
 
-  storage_image_reference {
+  source_image_reference {
     publisher = "Canonical"
-    offer     = "UbuntuServer"
+    offer     = "0001-com-ubuntu-server-jammy"
     sku       = "20_04-lts"
     version   = "latest"
-  }
-
-  os_profile {
-    computer_name  = "JumpVM"
-    admin_username = "JumpVmUser"
-    admin_password = "Password1234!"
-  }
-
-  os_profile_linux_config {
-    disable_password_authentication = false
   }
 
 
