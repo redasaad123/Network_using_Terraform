@@ -20,6 +20,9 @@ jobs:
       ARM_SUBSCRIPTION_ID: ${{ secrets.SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.TENANT_ID }}
       ARM_SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
+
+      TF_VAR_ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -38,7 +41,7 @@ jobs:
       - name: Setup ssh key
         run: |
           mkdir -p ~/.ssh
-          echo "$ARM_SSH_PUBLIC_KEY" >> ~/.ssh/networkproject_key.pub
+          echo "${{ secrets.SSH_PUBLIC_KEY }}" >> ~/.ssh/networkproject_key.pub
           echo "${{ secrets.SSH_PRIVATE_KEY }}" >> ~/.ssh/authorized_keys
           chmod 600 ~/.ssh/authorized_keys
           chmod 644 ~/.ssh/networkproject_key.pub
