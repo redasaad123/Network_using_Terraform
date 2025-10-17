@@ -1,8 +1,8 @@
 
-resource "azurerm_resource_group" "NetGroup" {
-name     = "Network-group"
-location = "West Europe"
-}
+# resource "azurerm_resource_group" "NetGroup" {
+# name     = "Network-group"
+# location = "West Europe"
+# }
 
 
 resource "azurerm_storage_account" "storage_project" {
