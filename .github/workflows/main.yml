@@ -65,8 +65,7 @@ jobs:
           LB_IP=$(terraform output -raw lb_public_ip)
           echo "Jump_IP=$JUMP_IP" >> $GITHUB_OUTPUT
           echo "LB_IP=$LB_IP" >> $GITHUB_OUTPUT
-          echo "Jump Public IP: $JUMP_IP"
-          echo "LoadBalancer Public IP: $LB_IP"
+          
 
 
 
