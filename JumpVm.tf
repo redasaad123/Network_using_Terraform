@@ -1,49 +1,49 @@
-# resource "azurerm_public_ip" "Jump-PublicIP" {
-# name                = "PublicIP"
-# location            = azurerm_resource_group.NetGroup.location
-# resource_group_name = azurerm_resource_group.NetGroup.name
-# allocation_method   = "Static"
-# sku                 = "Standard"
-# }
+resource "azurerm_public_ip" "Jump-PublicIP" {
+name                = "PublicIP"
+location            = azurerm_resource_group.NetGroup.location
+resource_group_name = azurerm_resource_group.NetGroup.name
+allocation_method   = "Static"
+sku                 = "Standard"
+}
 
-# resource "azurerm_network_security_group" "NSG" {
-#     name                = "NSG"
-#     location            = azurerm_resource_group.NetGroup.location
-#     resource_group_name = azurerm_resource_group.NetGroup.name
+resource "azurerm_network_security_group" "NSG" {
+    name                = "NSG"
+    location            = azurerm_resource_group.NetGroup.location
+    resource_group_name = azurerm_resource_group.NetGroup.name
     
-#     security_rule {
-#         name                       = "Allow-SSH"
-#         priority                   = 1001
-#         direction                  = "Inbound"
-#         access                     = "Allow"
-#         protocol                   = "Tcp"
-#         source_port_range          = "*"
-#         destination_port_range     = "22"
-#         source_address_prefix      = "*"
-#         destination_address_prefix = "*"
-#     }
-# }
+    security_rule {
+        name                       = "Allow-SSH"
+        priority                   = 1001
+        direction                  = "Inbound"
+        access                     = "Allow"
+        protocol                   = "Tcp"
+        source_port_range          = "*"
+        destination_port_range     = "22"
+        source_address_prefix      = "*"
+        destination_address_prefix = "*"
+    }
+}
 
 
-# resource "azurerm_subnet_network_security_group_association" "JumpSubnetNSGAssociation" {
-# subnet_id                 = azurerm_subnet.Jump-subnet.id
-# network_security_group_id = azurerm_network_security_group.NSG.id
-# }
+resource "azurerm_subnet_network_security_group_association" "JumpSubnetNSGAssociation" {
+subnet_id                 = azurerm_subnet.Jump-subnet.id
+network_security_group_id = azurerm_network_security_group.NSG.id
+}
 
 
-# resource "azurerm_network_interface" "NIC" {
-#     name                = "NIC"
-#     location            = azurerm_resource_group.NetGroup.location
-#     resource_group_name = azurerm_resource_group.NetGroup.name
+resource "azurerm_network_interface" "NIC" {
+    name                = "NIC"
+    location            = azurerm_resource_group.NetGroup.location
+    resource_group_name = azurerm_resource_group.NetGroup.name
     
-#     ip_configuration {
-#         name                          = "internal"
-#         subnet_id                     = azurerm_subnet.Jump-subnet.id
-#         private_ip_address_allocation = "Dynamic"
-#         public_ip_address_id          = azurerm_public_ip.Jump-PublicIP.id
-#     }
+    ip_configuration {
+        name                          = "internal"
+        subnet_id                     = azurerm_subnet.Jump-subnet.id
+        private_ip_address_allocation = "Dynamic"
+        public_ip_address_id          = azurerm_public_ip.Jump-PublicIP.id
+    }
 
-# }
+}
 
 
 
