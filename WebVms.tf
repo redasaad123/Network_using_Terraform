@@ -1,4 +1,4 @@
-resource "network_security_group" "web_nsg" {
+resource "azurerm_network_security_group" "web_nsg" {
 
     name                = "webNSG"
     location            = data.azurerm_resource_group.NetGroup.location
