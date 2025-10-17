@@ -51,10 +51,10 @@ jobs:
           chmod 644 ~/.ssh/networkproject_key.pub
 
       - name: Terraform Plan
-        run: terraform plan
+        run: terraform plan -out=tfplan
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve
+        run: terraform apply -auto-approve tfplan
 
       - name: Terraform Output
         id: output
@@ -62,6 +62,8 @@ jobs:
           # للحصول على قيمة jump_public_ip
           JUMP_IP=$(terraform output -raw jump_public_ip)
           LB_IP=$(terraform output -raw lb_public_ip)
+          echo "Jump_IP=$JUMP_IP" >> $GITHUB_OUTPUT
+          echo "LB_IP=$LB_IP" >> $GITHUB_OUTPUT
           echo "Jump Public IP: $JUMP_IP"
           echo "LoadBalancer Public IP: $LB_IP"
 
