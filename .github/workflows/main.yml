@@ -60,19 +60,17 @@ jobs:
         id: output
         run: |
           terraform output
-          JUMP_IP=$(terraform output -raw jump_public_ip)
-          LB_IP=$(terraform output -raw lb_public_ip)
-          echo "jump_public_ip=$JUMP_IP" >> $GITHUB_OUTPUT
-          echo "lb_public_ip=$LB_IP" >> $GITHUB_OUTPUT
-          echo "Jump Public IP: $JUMP_IP"
-          echo "LB Public IP: $LB_IP"
-
+          JUMP_IP=$(terraform output -raw jump_public_ip 2>/dev/null | tr -d '\n')
+          LB_IP=$(terraform output -raw lb_public_ip 2>/dev/null | tr -d '\n')
+          echo "jump_public_ip=${JUMP_IP}" >> $GITHUB_OUTPUT
+          echo "lb_public_ip=${LB_IP}" >> $GITHUB_OUTPUT
+          echo "Jump Public IP: ${JUMP_IP}"
+          echo "LB Public IP: ${LB_IP}"
 
       - name: Use Terraform Output
         run: |
           echo "Jump IP: ${{ steps.output.outputs.jump_public_ip }}"
           echo "LB IP: ${{ steps.output.outputs.lb_public_ip }}"
-          
 
 
 
