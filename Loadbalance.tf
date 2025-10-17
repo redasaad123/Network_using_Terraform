@@ -32,7 +32,6 @@ resource "azurerm_lb_probe" "web_health_probe" {
     name                = "webHealthProbe"
     loadbalancer_id     = azurerm_lb.web_lb.id
     protocol            = "Tcp"
-    request_path        = "/"
     port                = 80
     interval_in_seconds = 15
     number_of_probes    = 2
