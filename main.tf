@@ -35,14 +35,14 @@ resource "azurerm_subnet" "NatGateway-subnet" {
 }
 
 
-resource "azurerm_subnet" "web-subnet-1" {
+resource "azurerm_subnet" "Web-subnet-1" {
   name                 = "web-subnet-1"
   resource_group_name  = data.azurerm_resource_group.NetGroup.name
   virtual_network_name = azurerm_virtual_network.VNet.name
   address_prefixes     = ["192.168.1.0/24"]
 }
 
-resource "azurerm_subnet" "web-subnet-2" {
+resource "azurerm_subnet" "Web-subnet-2" {
   name                 = "web-subnet-2"
   resource_group_name  = data.azurerm_resource_group.NetGroup.name
   virtual_network_name = azurerm_virtual_network.VNet.name

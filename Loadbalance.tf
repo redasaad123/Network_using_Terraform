@@ -50,10 +50,6 @@ resource "azurerm_lb_rule" "web_lb_rule" {
     probe_id                       = azurerm_lb_probe.web_health_probe.id
 }
 
-resource "azurerm_virtual_machine_scale_set_backend_address_pool_association" "vmss_bpool_assoc" {
-  virtual_machine_scale_set_id = azurerm_linux_virtual_machine_scale_set.web_vmss.id
-  backend_address_pool_id      = azurerm_lb_backend_address_pool.web_backend_pool.id
-}
 
 
 

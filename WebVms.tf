@@ -74,6 +74,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "web_vmss" {
             name                                   = "webVMSSIPConfig"
             subnet_id                              = azurerm_subnet.Web-subnet-1.id
             primary                                = true
+            load_balancer_backend_address_pool_ids = [azurerm_lb_backend_address_pool.web_backend_pool.id]
         }
     }
 
@@ -88,8 +89,6 @@ resource "azurerm_linux_virtual_machine_scale_set" "web_vmss" {
     sku       = "22_04-lts-gen2"
     version   = "latest"
 }
-
-  health_probe_id = azurerm_lb_probe.web_probe.id
 
   
 }
