@@ -17,8 +17,13 @@ sku                 = "Standard"
 
 }
 
-resource "azurerm_subnet_nat_gateway_association" "NatGatewaySubnetAssociation" {
-subnet_id      = azurerm_subnet.NatGateway-subnet.id
+resource "azurerm_subnet_nat_gateway_association" "webSubnet1Association" {
+subnet_id      = azurerm_subnet.web-subnet-1.id
+nat_gateway_id = azurerm_nat_gateway.NatGateway.id
+}
+
+resource "azurerm_subnet_nat_gateway_association" "webSubnet2Association" {
+subnet_id      = azurerm_subnet.web-subnet-2.id
 nat_gateway_id = azurerm_nat_gateway.NatGateway.id
 }
 

@@ -48,17 +48,6 @@ resource "azurerm_network_interface" "NIC" {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
 resource "azurerm_linux_virtual_machine" "JumpVM" {
 name                  = "JumpVM"
 location              = data.azurerm_resource_group.NetGroup.location
