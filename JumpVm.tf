@@ -61,8 +61,8 @@ resource "azurerm_network_interface" "NIC" {
 
 resource "azurerm_linux_virtual_machine" "JumpVM" {
 name                  = "JumpVM"
-location              = azurerm_resource_group.NetGroup.location
-resource_group_name   = azurerm_resource_group.NetGroup.name
+location              = data.azurerm_resource_group.NetGroup.location
+resource_group_name   = data.azurerm_resource_group.NetGroup.name
 size               = "Standard_B1s"
 admin_username        = "JumpServeruser"
 network_interface_ids = [azurerm_network_interface.NIC.id]
