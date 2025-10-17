@@ -59,7 +59,7 @@ jobs:
       - name: Terraform Output
         id: output
         run: |
-          # قراءة القيم مباشرة بدون أي debug
+          terraform output
           JUMP_IP=$(terraform output -raw jump_public_ip)
           LB_IP=$(terraform output -raw lb_public_ip)
           echo "jump_public_ip=$JUMP_IP" >> $GITHUB_OUTPUT
