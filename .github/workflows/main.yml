@@ -64,6 +64,10 @@ jobs:
           LB_IP=$(terraform output -raw lb_public_ip)
           echo "jump_public_ip=$JUMP_IP" >> $GITHUB_OUTPUT
           echo "lb_public_ip=$LB_IP" >> $GITHUB_OUTPUT
+      - name: Use Terraform Output
+        run: |
+          echo "Jump IP: ${{ steps.output.outputs.jump_public_ip }}"
+          echo "LB IP: ${{ steps.output.outputs.lb_public_ip }}"
 
           
 
