@@ -4,6 +4,8 @@ location            = azurerm_resource_group.NetGroup.location
 resource_group_name = azurerm_resource_group.NetGroup.name
 allocation_method   = "Static"
 sku                 = "Standard"
+
+
 }
 
 resource "azurerm_network_security_group" "NSG" {
