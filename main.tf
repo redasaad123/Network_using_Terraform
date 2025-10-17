@@ -9,10 +9,10 @@ provider "azurerm" {
   
 }
 
-resource "azurerm_resource_group" "NetGroup" {
-  name     = "Network-group"
-  location = "West Europe"
-}
+# resource "azurerm_resource_group" "NetGroup" {
+#   name     = "Network-group"
+#   location = "West Europe"
+# }
 
 # resource "azurerm_virtual_network" "VNet" {
 #   name                = "VNet"
@@ -50,31 +50,107 @@ resource "azurerm_resource_group" "NetGroup" {
 # }
 
 
+# resource "azurerm_public_ip" "Jump-PublicIP" {
+#   name                = "PublicIP"
+#   location            = azurerm_resource_group.NetGroup.location
+#   resource_group_name = azurerm_resource_group.NetGroup.name
+#   allocation_method   = "Static"
+#   sku                 = "Standard"
+# }
+
+# resource "azurerm_network_security_group" "NSG" {
+#     name                = "NSG"
+#     location            = azurerm_resource_group.NetGroup.location
+#     resource_group_name = azurerm_resource_group.NetGroup.name
+    
+#     security_rule {
+#         name                       = "Allow-SSH"
+#         priority                   = 1001
+#         direction                  = "Inbound"
+#         access                     = "Allow"
+#         protocol                   = "Tcp"
+#         source_port_range          = "*"
+#         destination_port_range     = "22"
+#         source_address_prefix      = "*"
+#         destination_address_prefix = "*"
+#     }
+# }
+
+
+# resource "azurerm_subnet_network_security_group_association" "JumpSubnetNSGAssociation" {
+#   subnet_id                 = azurerm_subnet.Jump-subnet.id
+#   network_security_group_id = azurerm_network_security_group.NSG.id
+# }
+
+
+# resource "azurerm_network_interface" "NIC" {
+#     name                = "NIC"
+#     location            = azurerm_resource_group.NetGroup.location
+#     resource_group_name = azurerm_resource_group.NetGroup.name
+    
+#     ip_configuration {
+#         name                          = "internal"
+#         subnet_id                     = azurerm_subnet.Jump-subnet.id
+#         private_ip_address_allocation = "Dynamic"
+#         public_ip_address_id          = azurerm_public_ip.Jump-PublicIP.id
+#     }
+  
+# }
+
+# resource "azurerm_linux_virtual_machine" "JumpVM" {
+#   name                  = "JumpVM"
+#   location              = azurerm_resource_group.NetGroup.location
+#   resource_group_name   = azurerm_resource_group.NetGroup.name
+#   size               = "Standard_B1s"
+#   admin_username        = "azureuser"
+#   network_interface_ids = [azurerm_network_interface.NIC.id]
+  
+
+
+#   admin_ssh_key {
+#     username   = "JumpServeruser"
+#     public_key = var.ssh_public_key
+#   }
+  
+
+#   os_disk {
+#     name              = "JumpVM_OSDisk"
+#     caching           = "ReadWrite"
+#     storage_account_type = "Standard_LRS"
+#   }
+
+#   source_image_reference {
+#     publisher = "Canonical"
+#     offer     = "0001-com-ubuntu-server-jammy"
+#     sku       = "20_04-lts"
+#     version   = "latest"
+#   }
+
+
+# }
 
 
 
 
 
+# resource "azurerm_lb" "LoadBalancer" {
+#   name                = "LoadBalancer"
+#   location            = azurerm_resource_group.NetGroup.location
+#   resource_group_name = azurerm_resource_group.NetGroup.name
+#   sku                 = "Standard"
 
+#   frontend_ip_configuration {
+#     name                 = "PublicIPAddress"
+#     public_ip_address_id = azurerm_public_ip.PublicIP.id
+#   }
+# }
 
-# # resource "azurerm_lb" "LoadBalancer" {
-# #   name                = "LoadBalancer"
-# #   location            = azurerm_resource_group.NetGroup.location
-# #   resource_group_name = azurerm_resource_group.NetGroup.name
-# #   sku                 = "Standard"
+# resource "azurerm_lb_backend_address_pool" "BackendPool" {
+#   name                = "BackendPool"
+#   loadbalancer_id     = azurerm_lb.LoadBalancer.id
+#     resource_group_name = azurerm_resource_group.NetGroup.name
 
-# #   frontend_ip_configuration {
-# #     name                 = "PublicIPAddress"
-# #     public_ip_address_id = azurerm_public_ip.PublicIP.id
-# #   }
-# # }
-
-# # resource "azurerm_lb_backend_address_pool" "BackendPool" {
-# #   name                = "BackendPool"
-# #   loadbalancer_id     = azurerm_lb.LoadBalancer.id
-# #     resource_group_name = azurerm_resource_group.NetGroup.name
-
-# # }
+# }
 
 
 

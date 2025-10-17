@@ -1,3 +1,10 @@
+
+resource "azurerm_resource_group" "NetGroup" {
+  name     = "Network-group"
+  location = "West Europe"
+}
+
+
 terraform {
     backend "azurerm" {
         resource_group_name  = "Network-group"
