@@ -9,10 +9,7 @@ provider "azurerm" {
   
 }
 
-resource "azurerm_resource_group" "NetGroup" {
-  name     = "Network-group"
-  location = "West Europe"
-}
+
 
 # resource "azurerm_virtual_network" "VNet" {
 #   name                = "VNet"
