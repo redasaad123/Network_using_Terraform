@@ -59,9 +59,12 @@ jobs:
       - name: Terraform Output
         id: output
         run: |
-          terraform output
-          echo "Jump Public IP: ${output.jump_public_ip.value}"
-          echo "Load Balancer Public IP: ${output.lb_public_ip.value}"
-          
+          # للحصول على قيمة jump_public_ip
+          JUMP_IP=$(terraform output -raw jump_public_ip)
+          LB_IP=$(terraform output -raw lb_public_ip)
+          echo "Jump Public IP: $JUMP_IP"
+          echo "LoadBalancer Public IP: $LB_IP"
+
+
 
       
