@@ -56,4 +56,12 @@ jobs:
       - name: Terraform Apply
         run: terraform apply -auto-approve
 
+      - name: Terraform Output
+        id: output
+        run: |
+          terraform output
+          echo "Jump Public IP: ${output.jump_public_ip.value}"
+          echo "Load Balancer Public IP: ${output.lb_public_ip.value}"
+          
+
       
