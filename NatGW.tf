@@ -1,7 +1,7 @@
 resource "azurerm_nat_gateway" "NatGateway" {
     name                = "NatGateway"
-    location            = azurerm_resource_group.NetGroup.location
-    resource_group_name = azurerm_resource_group.NetGroup.name
+    location            = data.azurerm_resource_group.NetGroup.location
+    resource_group_name = data.azurerm_resource_group.NetGroup.name
     sku_name            = "Standard"
     # remove public_ip_address_ids here
 }
@@ -10,8 +10,8 @@ resource "azurerm_nat_gateway" "NatGateway" {
 
 resource "azurerm_public_ip" "NatpublicIP" {
 name                = "NatpublicIP"
-location            = azurerm_resource_group.NetGroup.location
-resource_group_name = azurerm_resource_group.NetGroup.name
+location            = data.azurerm_resource_group.NetGroup.location
+resource_group_name = data.azurerm_resource_group.NetGroup.name
 allocation_method   = "Static"
 sku                 = "Standard"
 

@@ -9,27 +9,27 @@ provider "azurerm" {
   
 }
 
-resource "azurerm_resource_group" "NetGroup" {
+data "azurerm_resource_group" "NetGroup" {
   name     = "NetGroup"
-  location = "spaincentral"
+
 }
 
 resource "azurerm_virtual_network" "VNet" {
   name                = "VNet"
   address_space       = ["192.168.0.0/16"]
-  location            = azurerm_resource_group.NetGroup.location
-  resource_group_name = azurerm_resource_group.NetGroup.name
+  location            = data.azurerm_resource_group.NetGroup.location
+  resource_group_name = data.azurerm_resource_group.NetGroup.name
 }
 resource "azurerm_subnet" "Jump-subnet" {
   name                 = "Jump-subnet"
-  resource_group_name  = azurerm_resource_group.NetGroup.name
+  resource_group_name  = data.azurerm_resource_group.NetGroup.name
   virtual_network_name = azurerm_virtual_network.VNet.name
   address_prefixes     = ["192.168.3.0/24"]
 }
 
 resource "azurerm_subnet" "NatGateway-subnet" {
   name                 = "NatGateway-subnet"
-  resource_group_name  = azurerm_resource_group.NetGroup.name
+  resource_group_name  = data.azurerm_resource_group.NetGroup.name
   virtual_network_name = azurerm_virtual_network.VNet.name
   address_prefixes     = ["192.168.4.0/24"]
 }
@@ -37,14 +37,14 @@ resource "azurerm_subnet" "NatGateway-subnet" {
 
 resource "azurerm_subnet" "web-subnet-1" {
   name                 = "web-subnet-1"
-  resource_group_name  = azurerm_resource_group.NetGroup.name
+  resource_group_name  = data.azurerm_resource_group.NetGroup.name
   virtual_network_name = azurerm_virtual_network.VNet.name
   address_prefixes     = ["192.168.1.0/24"]
 }
 
 resource "azurerm_subnet" "web-subnet-2" {
   name                 = "web-subnet-2"
-  resource_group_name  = azurerm_resource_group.NetGroup.name
+  resource_group_name  = data.azurerm_resource_group.NetGroup.name
   virtual_network_name = azurerm_virtual_network.VNet.name
   address_prefixes     = ["192.168.2.0/24"]
 }

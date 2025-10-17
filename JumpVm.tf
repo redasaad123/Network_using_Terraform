@@ -1,7 +1,7 @@
 resource "azurerm_public_ip" "Jump-PublicIP" {
 name                = "PublicIP"
-location            = azurerm_resource_group.NetGroup.location
-resource_group_name = azurerm_resource_group.NetGroup.name
+location            = data.azurerm_resource_group.NetGroup.location
+resource_group_name = data.azurerm_resource_group.NetGroup.name
 allocation_method   = "Static"
 sku                 = "Standard"
 
@@ -10,8 +10,8 @@ sku                 = "Standard"
 
 resource "azurerm_network_security_group" "NSG" {
     name                = "NSG"
-    location            = azurerm_resource_group.NetGroup.location
-    resource_group_name = azurerm_resource_group.NetGroup.name
+    location            = data.azurerm_resource_group.NetGroup.location
+    resource_group_name = data.azurerm_resource_group.NetGroup.name
     
     security_rule {
         name                       = "Allow-SSH"
@@ -35,9 +35,9 @@ network_security_group_id = azurerm_network_security_group.NSG.id
 
 resource "azurerm_network_interface" "NIC" {
     name                = "NIC"
-    location            = azurerm_resource_group.NetGroup.location
-    resource_group_name = azurerm_resource_group.NetGroup.name
-    
+    location            = data.azurerm_resource_group.NetGroup.location
+    resource_group_name = data.azurerm_resource_group.NetGroup.name
+
     ip_configuration {
         name                          = "internal"
         subnet_id                     = azurerm_subnet.Jump-subnet.id
