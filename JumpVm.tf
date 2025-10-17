@@ -57,34 +57,34 @@
 
 
 
-resource "azurerm_linux_virtual_machine" "JumpVM" {
-name                  = "JumpVM"
-location              = azurerm_resource_group.NetGroup.location
-resource_group_name   = azurerm_resource_group.NetGroup.name
-size               = "Standard_B1s"
-admin_username        = "azureuser"
-network_interface_ids = [azurerm_network_interface.NIC.id]
+# resource "azurerm_linux_virtual_machine" "JumpVM" {
+# name                  = "JumpVM"
+# location              = azurerm_resource_group.NetGroup.location
+# resource_group_name   = azurerm_resource_group.NetGroup.name
+# size               = "Standard_B1s"
+# admin_username        = "azureuser"
+# network_interface_ids = [azurerm_network_interface.NIC.id]
 
 
 
-admin_ssh_key {
-    username   = "JumpServeruser"
-    public_key = var.ssh_public_key
-}
+# admin_ssh_key {
+#     username   = "JumpServeruser"
+#     public_key = var.ssh_public_key
+# }
 
 
-os_disk {
-    name              = "JumpVM_OSDisk"
-    caching           = "ReadWrite"
-    storage_account_type = "Standard_LRS"
-}
+# os_disk {
+#     name              = "JumpVM_OSDisk"
+#     caching           = "ReadWrite"
+#     storage_account_type = "Standard_LRS"
+# }
 
-source_image_reference {
-    publisher = "Canonical"
-    offer     = "0001-com-ubuntu-server-jammy"
-    sku       = "20_04-lts"
-    version   = "latest"
-}
+# source_image_reference {
+#     publisher = "Canonical"
+#     offer     = "0001-com-ubuntu-server-jammy"
+#     sku       = "20_04-lts"
+#     version   = "latest"
+# }
 
 
-}
+# }
