@@ -11,7 +11,7 @@ provider "azurerm" {
 
 resource "azurerm_resource_group" "NetGroup" {
   name     = "NetGroup"
-  location = "West Europe"
+  location = "spaincentral"
 }
 
 resource "azurerm_virtual_network" "VNet" {

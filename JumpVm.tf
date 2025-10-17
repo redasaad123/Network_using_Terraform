@@ -62,7 +62,7 @@ name                  = "JumpVM"
 location              = azurerm_resource_group.NetGroup.location
 resource_group_name   = azurerm_resource_group.NetGroup.name
 size               = "Standard_B1s"
-admin_username        = "azureuser"
+admin_username        = "JumpServeruser"
 network_interface_ids = [azurerm_network_interface.NIC.id]
 
 
@@ -82,7 +82,7 @@ os_disk {
 source_image_reference {
     publisher = "Canonical"
     offer     = "0001-com-ubuntu-server-jammy"
-    sku       = "20_04-lts"
+    sku       = "22_04-lts-gen2"
     version   = "latest"
 }
 
