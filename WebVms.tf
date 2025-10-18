@@ -17,13 +17,13 @@ resource "azurerm_network_security_group" "web_nsg" {
   }
 
    security_rule {
-    name                       = "Allow-HTTP-HTTPS"
+    name                       = "Allow-HTTP"
     priority                   = 200
     direction                  = "Inbound"
     access                     = "Allow"
     protocol                   = "Tcp"
     source_port_range          = "*"
-    destination_port_range     = "80-443"
+    destination_port_range     = "80"
     source_address_prefix      = "AzureLoadBalancer"
     destination_address_prefix = "*"
   }
@@ -90,5 +90,5 @@ resource "azurerm_linux_virtual_machine_scale_set" "web_vmss" {
     version   = "latest"
 }
 
-  
+
 }
