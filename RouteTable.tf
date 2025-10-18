@@ -16,13 +16,6 @@ resource "azurerm_route_table" "RouteTablePrivate" {
   location            = data.azurerm_resource_group.NetGroup.location
   resource_group_name = data.azurerm_resource_group.NetGroup.name
 
-  route {
-    name                   = "ToInternetViaNAT"
-    address_prefix         = "0.0.0.0/0"
-    next_hop_type          = "VirtualAppliance"
-    next_hop_in_ip_address = azurerm_nat_gateway.NatGateway.id
-  }
-  
 }
 
 
@@ -36,6 +29,8 @@ resource "azurerm_subnet_route_table_association" "PrivateSubnet1RouteTableAssoc
   subnet_id      = azurerm_subnet.Web-subnet-1.id
   route_table_id = azurerm_route_table.RouteTablePrivate.id
 }
+
+
 
 resource "azurerm_subnet_route_table_association" "PrivateSubnet2RouteTableAssociation" {
   subnet_id      = azurerm_subnet.Web-subnet-2.id
