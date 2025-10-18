@@ -20,7 +20,7 @@ resource "azurerm_route_table" "RouteTablePrivate" {
     name                   = "ToInternetViaNAT"
     address_prefix         = "0.0.0.0/0"
     next_hop_type          = "VirtualAppliance"
-    next_hop_in_ip_address = azurerm_nat_gateway.nat_gateway.id
+    next_hop_in_ip_address = azurerm_nat_gateway.NatGateway.id
   }
   
 }
